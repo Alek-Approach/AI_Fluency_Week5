@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Fluency · Week 5 · Diligence Workbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#15375F; --navy2:#1E4E8C; --gold:#D4A017; --olive:#8B7536;
+  --bg:#EEF2F8; --card:#FFFFFF; --ink:#16263D; --muted:#55647A; --line:#C9D3E2;
+  --soft:#F3F6FB; --ok:#1F7A4A; --okbg:#E3F4EA; --bad:#B3261E; --badbg:#FBE7E5;
+  --onnavy:#FFFFFF;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A2A; --card:#17253A; --ink:#E7EDF6; --muted:#A8B6CB; --line:#2E4260;
+    --soft:#1D2E47; --ok:#6FD39C; --okbg:#173A2A; --bad:#FF8A80; --badbg:#41201F;
+    --navy:#163A66; --navy2:#2A5FA5;
+    color-scheme: dark;
+  }
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3","Segoe UI",Calibri,Arial,sans-serif;font-size:17px;line-height:1.55}
+a{color:var(--navy2)}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px 80px}
+
+/* Header */
+header.hero{background:var(--navy);color:var(--onnavy);border-left:10px solid var(--gold);border-bottom:8px solid var(--olive)}
+.hero-in{max-width:960px;margin:0 auto;padding:36px 22px 28px}
+.hero .course{color:var(--gold);font-weight:700;letter-spacing:.02em}
+.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:8px 0 10px;font-weight:800}
+.hero .focus{color:var(--gold);font-style:italic;font-size:19px;margin:0}
+.student{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.student label{font-size:17px;color:#D9E3F2;display:flex;flex-direction:column;gap:4px}
+.student input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:6px;padding:8px 10px;font:inherit;min-width:220px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+/* Timeline */
+.timeline{display:grid;grid-template-columns:100fr 30fr 100fr;gap:4px;margin:24px 0 8px}
+.timeline a{display:block;text-decoration:none;padding:12px 14px;color:#fff;font-weight:700;border-radius:4px}
+.timeline small{display:block;font-weight:400;opacity:.9}
+.t1{background:var(--navy2)}.tb{background:#5C6F86;text-align:center}.t2{background:var(--olive)}
+.tl-note{font-size:17px;color:var(--muted);margin:0 0 6px}
+
+/* Sticky nav */
+nav.jump{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin}
+nav.jump a{flex:none;font-size:17px;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+nav.jump a.b2{border-color:var(--olive)}
+
+/* Block banners */
+.block{margin:36px 0 14px;padding:22px 24px;color:#fff;border-top:6px solid var(--gold)}
+.block.b1{background:var(--navy)}.block.b2{background:var(--olive);border-top-color:var(--navy)}
+.block h2{margin:2px 0 4px;font-size:30px;line-height:1.15}
+.block p{margin:0;opacity:.95}
+
+/* Activities */
+section.act{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--navy2);border-radius:4px;padding:22px 24px;margin:18px 0}
+section.act.b2{border-left-color:var(--olive)}
+section.act.handout{border-left-color:var(--gold);background:linear-gradient(var(--card),var(--card)) padding-box}
+.act-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.tag{font-size:17px;font-weight:700;color:var(--muted)}
+.act h3{margin:2px 0 6px;font-size:25px;line-height:1.2;color:var(--ink)}
+.meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:17px;font-weight:600;background:var(--soft);border:1px solid var(--line);padding:3px 9px;border-radius:999px;color:var(--ink)}
+.howto{background:var(--soft);border-left:4px solid var(--gold);padding:12px 16px;margin:12px 0 16px;border-radius:0 4px 4px 0}
+.howto strong{display:block;margin-bottom:4px}
+.howto ol,.howto ul{margin:4px 0 0;padding-left:22px}
+.part{font-weight:700;font-size:18px;margin:20px 0 8px;color:var(--navy2)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .part{color:#8FB6EA}}
+.lang{font-size:17px;background:var(--soft);border:1px dashed var(--line);padding:10px 14px;border-radius:4px;margin:10px 0}
+.lang b{color:var(--olive)}
+
+/* Items */
+.item{padding:10px 12px;border:1px solid var(--line);border-radius:4px;margin:8px 0;background:var(--card)}
+.item.ok{border-color:var(--ok);background:var(--okbg)}
+.item.bad{border-color:var(--bad);background:var(--badbg)}
+.item .row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.item .row>span{flex:1 1 380px}
+.exp{display:none;font-size:17px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);color:var(--ink)}
+.checked .exp{display:block}
+.mc label{display:flex;gap:8px;align-items:flex-start;padding:4px 0;cursor:pointer}
+.mc input{margin-top:5px}
+select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:7px 9px}
+select{min-width:170px}
+textarea{width:100%;min-height:78px;resize:vertical;margin-top:4px}
+input[type=text]{width:100%}
+.inline input[type=text]{width:auto;min-width:200px}
+label.q{display:block;font-weight:600;margin:12px 0 2px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.btn{font:inherit;font-weight:700;font-size:17px;border:0;border-radius:4px;padding:9px 16px;cursor:pointer;background:var(--navy2);color:#fff}
+.btn.gold{background:var(--gold);color:#15375F}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.hero .btn.ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.btn.timer{background:transparent;border:1px solid var(--line);color:var(--ink);font-size:17px;padding:4px 10px}
+.score{font-weight:700}
+
+/* Tables / grids */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:720px){.grid3,.grid2{grid-template-columns:1fr}.timeline{grid-template-columns:1fr}}
+.typebox{border:1px solid var(--line);border-top:6px solid var(--navy);padding:12px 14px;background:var(--card)}
+.typebox.p2{border-top-color:var(--navy2)}.typebox.p3{border-top-color:var(--olive)}
+.typebox h4{margin:0 0 4px;font-size:19px}
+.typebox ul{margin:6px 0 0;padding-left:18px;font-size:17px}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:17px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff}
+.reading{background:var(--soft);border:1px solid var(--line);padding:14px 18px;border-radius:4px;font-size:17px;line-height:1.65}
+.reading p{margin:0 0 10px}
+.reading p:last-child{margin:0}
+.quote{background:var(--navy);color:#fff;padding:16px 20px;font-style:italic;font-weight:600;font-size:18px;border-radius:4px}
+.prompt{position:relative;background:#0F2440;color:#E8EEF7;font-family:Consolas,"Courier New",monospace;font-size:17px;padding:14px 16px;border-radius:4px;white-space:pre-wrap;margin:8px 0}
+.prompt .copy{position:absolute;top:8px;right:8px;font-family:"Source Sans 3",sans-serif}
+.brief{background:var(--card);border:1px solid var(--olive);border-radius:4px;padding:12px 16px;font-size:17px}
+.brief ul{margin:4px 0 0;padding-left:20px}
+.sample-title{font-size:20px;margin:24px 0 6px;color:var(--olive)}
+.sent{font-style:italic}
+.cycle{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.cycle .item{flex:1 1 180px;margin:0}
+.wc{font-size:17px;color:var(--muted)}
+.break{background:#5C6F86;color:#fff;text-align:center;padding:30px 20px;margin:36px 0;border-bottom:8px solid var(--gold)}
+.break h2{margin:0 0 6px;font-size:32px}
+.checklist label{display:flex;gap:8px;align-items:flex-start;padding:3px 0}
+.checklist input{margin-top:6px}
+.takeaways .item{border-left:6px solid var(--olive);font-weight:600}
+.rubric td:first-child{font-weight:600}
+.rubric input{transform:scale(1.2)}
+footer{text-align:center;color:var(--muted);font-size:17px;margin-top:40px}
+
+/* Floating timer */
+#timer{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;background:var(--navy);color:#fff;border:2px solid var(--gold);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+#timer[hidden]{display:none}
+#timer .t{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;min-width:76px;text-align:center}
+#timer.done{background:var(--bad)}
+#timer button{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff;border-radius:4px;padding:3px 8px;cursor:pointer;font:inherit;font-size:17px}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+@media print{
+  body{background:#fff;font-size:17px}
+  nav.jump,.actions,.toolbar,#timer,.btn.timer,.copy{display:none!important}
+  section.act{break-inside:avoid-page;border-left-width:4px}
+  .exp{display:block}
+  header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .block,.break,th,.quote,.prompt{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  textarea{min-height:60px;border:1px solid #999}
+}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hero .logo{height:52px;width:auto;background:#fff;padding:6px 10px;border-radius:4px}
+.goals{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--gold);padding:14px 20px;margin:14px 0}
+.goals ol{margin:6px 0 0;padding-left:22px}
+.note{font-size:17px;color:var(--muted);margin:10px 0}
+.policy{background:var(--card);border:2px solid var(--navy2);border-radius:4px;padding:16px 22px;font-size:17px}
+.policy h4{margin:0 0 8px;font-size:19px;color:var(--navy2)}
+.policy p{margin:6px 0}
+.case{background:var(--soft);border:1px solid var(--line);border-top:5px solid var(--olive);padding:12px 16px;border-radius:4px}
+.case h4{margin:0 0 6px;font-size:17px}
+.case p{margin:0;font-size:17px;line-height:1.6}
+td input[type=text]{min-width:120px}
+label.q select{margin-left:6px}
+.timeline.tl5{grid-template-columns:100fr 22fr 100fr}
+@media (max-width:720px){.timeline.tl5{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="hero-top"><div class="course">AI Fluency · Week 5 · Student Workbook</div><img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcYAAABuCAIAAAAyOCRJAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjFhNjE2NDA2LWRmZGQtNDZiMS1iYmRkLTY2NDBjZTllNTkwMQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNoylgOaHO1q/626gGP5wk8RwAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6YzA3MGRmYzMtZmQ5Ny00NTY3LWIxOGItOGJhMmMzZDVhY2YybHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaJLb1XJZLeArjok7nyjdQ3kAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYICtoQw87bu5sxQtiLI2o2yZzbdm1TdcF1MucJWaZJo+0pGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2g61ehBFNFcEvScT+M3Zi9ZAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggqyG/HyPuyBbrrOfj4FxlsgNGUMaw4yaFb6SiMI+hOg9kbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYToxYTYxNjQwNi1kZmRkLTQ2YjEtYmJkZC02NjQwY2U5ZTU5MDEvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDowM2E1MzUxNS1lMWQ4LTRlMDMtODdhOC1kNmFiZGFhYmJhYjNyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggK2hDDztu7mzFC2IsjajbJnNt2bVN1wXUy5wlZpkmj7SiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIHxFAvDkavT0p3Gci1SRr7SUN7hmhE2oqor3fDSVXX8aomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIM7GI5HCfRTMT0VGXPzlCTcwrF2ix9snKPMXNyxvYFvNdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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" alt="Approach International Student Center"></div>
+    <h1>Diligence: Using AI Responsibly</h1>
+    <p class="focus">HR, Privacy &amp; Ethics Focus</p>
+    <div class="student">
+      <label>Your name<input type="text" id="sname" placeholder="First and last name"></label>
+      <label>Date<input type="text" id="sdate" placeholder="e.g., Nov 10, 2026"></label>
+    </div>
+    <div class="toolbar">
+      <button class="btn gold" onclick="window.print()">Print / Save as PDF</button>
+      <button class="btn ghost" id="resetAll">Clear all my answers</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="timeline tl5" aria-label="Class schedule">
+    <a class="t1" href="#block1">Lesson 1 · Diligence: the ethics of AI use<small>0–100 min</small></a>
+    <a class="tb" href="#break">Break<small>100–110</small></a>
+    <a class="t2" href="#block2">Lesson 2 · HR, government &amp; AI failures<small>110–210 min</small></a>
+  </div>
+  <p class="tl-note">Your answers save automatically in this browser. Use the ⏱ buttons to start a timer. “Check answers” gives instant feedback. Online class: 📊 = poll, 💬 = chat, 💻 = breakout room.</p>
+
+  <div class="goals">
+    <strong>By the end of today, you will be able to:</strong>
+    <ol>
+      <li>Explain the three parts of Diligence and apply them to your own AI use.</li>
+      <li>Decide what information is safe to share with an AI tool, and when and how to disclose AI help.</li>
+      <li>Explain how bias gets into AI systems, using real cases from HR and government.</li>
+      <li>Write clear rules for a responsible AI use policy.</li>
+    </ol>
+  </div>
+
+  <nav class="jump" aria-label="Jump to activity">
+    <a href="#a1">1 Would you paste it?</a><a href="#a2">2 Three Diligences</a><a href="#a3">3 Privacy</a><a href="#a4">4 Ownership &amp; disclosure</a><a href="#a5">5 Bias videos</a><a href="#a6">6 AI &amp; jobs</a><a href="#a7">7 Policy doctor</a><a href="#a8">8 Exit check</a>
+    <a class="b2" href="#b1">9 Would you accept it?</a><a class="b2" href="#b2">10 HR &amp; Amazon</a><a class="b2" href="#b3">11 Predictive policing</a><a class="b2" href="#b4">12 Case clinic</a><a class="b2" href="#b5">13 Safeguards</a><a class="b2" href="#b6">14 Homework</a><a class="b2" href="#b7">15 Wrap-up</a>
+  </nav>
+
+  <!-- ===================== LESSON 1 ===================== -->
+  <div class="block b1" id="block1">
+    <div>Lesson 1 · 0–100 min</div>
+    <h2>Diligence: The Ethics of AI Use</h2>
+    <p>Engage → Study → Activate</p>
+  </div>
+
+  <!-- A1 ENGAGE -->
+  <section class="act" id="a1">
+    <div class="act-head">
+      <div><div class="tag">Activity 1 · Engage</div><h3>Would You Paste It?</h3></div>
+      <div class="meta"><span class="pill">📊 Poll + 💬 Chat</span><button class="btn timer" data-min="8">⏱ 8 min</button></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>
+      <ol><li>Imagine you use a free, public AI chatbot. Would you paste each thing below into it?</li>
+      <li>Choose <b>Yes</b> or <b>No</b> for each one. Don’t check yet: vote in the class poll first.</li>
+      <li>In the chat, explain ONE of your “No” answers. Then click “Check answers.”</li></ol>
+    </div>
+    <div class="cg" data-opts="Yes|No">
+      <div class="item"><div class="row"><span>1. A public news article you want summarised</span><select data-ans="Yes"></select></div><div class="exp">Yes. Public information carries no privacy risk.</div></div>
+      <div class="item"><div class="row"><span>2. Your bank statement, to “find where my money goes”</span><select data-ans="No"></select></div><div class="exp">No. Account numbers and spending history are sensitive. Remove the numbers or type the categories yourself.</div></div>
+      <div class="item"><div class="row"><span>3. Your manager’s confidential plan to close an office</span><select data-ans="No"></select></div><div class="exp">No. It isn’t yours to share, and confidential business data can leave the company’s control.</div></div>
+      <div class="item"><div class="row"><span>4. Your own cover letter, to check the grammar</span><select data-ans="Yes"></select></div><div class="exp">Yes, usually. It’s your own writing. Remove your phone number and address if you like.</div></div>
+      <div class="item"><div class="row"><span>5. A screenshot of a friend’s private messages, to “understand what she meant”</span><select data-ans="No"></select></div><div class="exp">No. It’s another person’s private information, shared without permission.</div></div>
+      <div class="item"><div class="row"><span>6. A medical test result, to explain the words</span><select data-ans="No"></select></div><div class="exp">No, not with your name and ID on it. Health data is highly sensitive. Ask about the terms only (“What does a high ALT level mean?”).</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="lang"><b>Chat language:</b> “I wouldn’t paste ___ because ___.” · “It depends on ___.” · “I would only do it if ___.”</div>
+  </section>
+
+  <!-- A2 STUDY -->
+  <section class="act" id="a2">
+    <div class="act-head">
+      <div><div class="tag">Activity 2 · Study</div><h3>The Three Types of Diligence</h3></div>
+      <div class="meta"><span class="pill">👤 Individual</span><button class="btn timer" data-min="6">⏱ 6 min</button></div>
+    </div>
+    <div class="reading"><p><strong>Diligence</strong> means taking responsibility for what we do with AI and how we do it. It is the fourth “D” of AI Fluency: Delegation, Description, Discernment, Diligence.</p></div>
+    <div class="grid3" style="margin-top:12px">
+      <div class="typebox"><h4>Creation Diligence</h4><em>Before and during</em><ul><li>Which AI tool should I use?</li><li>Is it safe for this data?</li><li>Is AI right for this task at all?</li></ul></div>
+      <div class="typebox p2"><h4>Transparency Diligence</h4><em>Being honest</em><ul><li>Who needs to know AI helped?</li><li>How do I say it clearly?</li><li>Am I following the rules?</li></ul></div>
+      <div class="typebox p3"><h4>Deployment Diligence</h4><em>After: sharing the result</em><ul><li>Did I check the facts?</li><li>Could this hurt or be unfair to anyone?</li><li>Can I stand behind it?</li></ul></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>Which type of Diligence is each person practising? Choose, then check.</div>
+    <div class="cg" data-opts="Creation|Transparency|Deployment">
+      <div class="item"><div class="row"><span>1. Mei checks that her company allows the AI tool before she uses it for a client project.</span><select data-ans="Creation"></select></div><div class="exp">Creation: choosing the right tool before starting.</div></div>
+      <div class="item"><div class="row"><span>2. Omar adds a note to his report: “Claude helped me organise the data.”</span><select data-ans="Transparency"></select></div><div class="exp">Transparency: being honest about AI’s role.</div></div>
+      <div class="item"><div class="row"><span>3. Lucía verifies every statistic in an AI-drafted newsletter before she sends it to 5,000 customers.</span><select data-ans="Deployment"></select></div><div class="exp">Deployment: taking responsibility for what you share.</div></div>
+      <div class="item"><div class="row"><span>4. Daniel decides NOT to use AI to write a condolence message to a colleague.</span><select data-ans="Creation"></select></div><div class="exp">Creation: deciding whether AI is right for the task at all.</div></div>
+      <div class="item"><div class="row"><span>5. Aisha tells her teacher which parts of her essay AI helped with.</span><select data-ans="Transparency"></select></div><div class="exp">Transparency.</div></div>
+      <div class="item"><div class="row"><span>6. Before publishing an AI-written job ad, Ken checks it for language that could exclude older applicants.</span><select data-ans="Deployment"></select></div><div class="exp">Deployment: checking the output for harm or unfairness before it goes out.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+  </section>
+
+  <!-- A3 STUDY: PRIVACY -->
+  <section class="act handout" id="a3">
+    <div class="act-head">
+      <div><div class="tag">Activity 3 · Study · Handout #1</div><h3>Data Privacy &amp; AI: A Practical Guide</h3></div>
+      <div class="meta"><span class="pill">👤 Read 5 min</span><button class="btn timer" data-min="5">⏱ 5 min</button><span class="pill">👤 Practise 7 min</span><button class="btn timer" data-min="7">⏱ 7 min</button></div>
+    </div>
+    <div class="part">What happens when you paste something into an AI tool?</div>
+    <div class="reading">
+      <p>Your text is sent to the company’s computers (servers). Depending on the tool and your settings, it may be <strong>stored</strong>, <strong>reviewed by people</strong> for safety, or <strong>used to train future models</strong>. Free personal accounts and work accounts that your employer pays for often follow different rules. Once you paste something, you can’t fully control where it goes.</p>
+      <p><strong>Real example:</strong> In 2023, engineers at Samsung pasted confidential source code and meeting notes into ChatGPT to get help. Samsung then banned staff from using public AI chatbots on company devices.</p>
+    </div>
+    <div class="part">The traffic-light rule</div>
+    <div class="tbl"><table>
+      <tr><th>Light</th><th>Examples</th><th>What to do</th></tr>
+      <tr><td><b>🔴 Red: never</b></td><td>Passwords, ID or passport numbers, bank and card numbers, health records, other people’s personal data or work (without permission), confidential company data (code, client lists, unreleased results), student grades</td><td>Don’t paste it. Describe the problem in general words instead.</td></tr>
+      <tr><td><b>🟡 Yellow: careful</b></td><td>Internal documents, meeting notes, customer emails, drafts that mention real people</td><td>Remove names and numbers first (anonymise), AND use only a tool your organisation approves.</td></tr>
+      <tr><td><b>🟢 Green: OK</b></td><td>Public information, general questions, your own writing without private details, made-up examples</td><td>Go ahead, but still check the answer (Discernment!).</td></tr>
+    </table></div>
+    <div class="part">Five questions before you paste</div>
+    <div class="checklist">
+      <label><input type="checkbox"> Is this information mine to share?</label>
+      <label><input type="checkbox"> Would I be OK if it appeared in public?</label>
+      <label><input type="checkbox"> Does my school or company allow this tool for this data?</label>
+      <label><input type="checkbox"> Can I remove names, numbers, and other identifying details?</label>
+      <label><input type="checkbox"> Does the tool use my chats for training, and can I turn that off?</label>
+    </div>
+    <div class="lang"><b>How to anonymise:</b> Replace names with roles (“Maria Lopez” → “Customer A”). Remove numbers (account, order, phone). Make details general (“a hospital in Chicago” → “a large hospital”).</div>
+    <div class="part">Practise: Red, Yellow, or Green?</div>
+    <div class="cg" data-opts="Red|Yellow|Green">
+      <div class="item"><div class="row"><span>1. A client’s full name, address, and card number, to “write a refund letter”</span><select data-ans="Red"></select></div><div class="exp">Red. Write the letter with “[Customer name]” instead.</div></div>
+      <div class="item"><div class="row"><span>2. A government website page about visa rules, to simplify the English</span><select data-ans="Green"></select></div><div class="exp">Green. Public information. (Still check the simplified version against the original!)</div></div>
+      <div class="item"><div class="row"><span>3. Your company’s unreleased sales figures</span><select data-ans="Red"></select></div><div class="exp">Red. Confidential business data.</div></div>
+      <div class="item"><div class="row"><span>4. A customer complaint email that still has the customer’s name and order number</span><select data-ans="Yellow"></select></div><div class="exp">Yellow. Remove the name and number first, and use an approved tool.</div></div>
+      <div class="item"><div class="row"><span>5. A classmate’s essay, to check it, without asking them</span><select data-ans="Red"></select></div><div class="exp">Red. It’s someone else’s work, and you don’t have permission.</div></div>
+      <div class="item"><div class="row"><span>6. Team meeting notes that mention colleagues by name</span><select data-ans="Yellow"></select></div><div class="exp">Yellow. Replace names with roles and use a work-approved tool.</div></div>
+      <div class="item"><div class="row"><span>7. A made-up example: “A café owner wants to raise prices by 10%. How should she tell customers?”</span><select data-ans="Green"></select></div><div class="exp">Green. No real person or data.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <label class="q">Rewrite this prompt so it is safe (anonymise it):</label>
+    <div class="prompt">Write a polite email to Jason Park (jason.park@globex.com, account #448-2291) explaining that his late payment fee of $85 will not be refunded.</div>
+    <textarea placeholder="Your safer version..."></textarea>
+  </section>
+
+  <!-- A4 STUDY: IP + DISCLOSURE -->
+  <section class="act" id="a4">
+    <div class="act-head">
+      <div><div class="tag">Activity 4 · Study</div><h3>Who Owns It? Should You Say So?</h3></div>
+      <div class="meta"><span class="pill">👤 Individual → 💬 Chat</span><button class="btn timer" data-min="10">⏱ 10 min</button></div>
+    </div>
+    <div class="part">Part A · Intellectual property: who owns AI-generated content?</div>
+    <div class="reading">
+      <p>The answer depends on the <strong>country</strong> and the <strong>tool’s terms of service</strong>. In the United States, the Copyright Office says copyright protects <strong>human</strong> creativity. Material made entirely by AI generally can’t be copyrighted, but your human contributions (your own text, how you select, arrange, and edit the material) can be protected. Other countries have different rules, and the law is still changing.</p>
+      <p>There is a second risk: AI can produce text or images very similar to someone else’s work. If you publish it, <strong>you</strong> may be responsible.</p>
+    </div>
+    <div class="cg" data-opts="True|False">
+      <div class="item"><div class="row"><span>1. If AI made it, I automatically own the copyright in every country.</span><select data-ans="False"></select></div><div class="exp">False. Rules depend on the country and the tool’s terms.</div></div>
+      <div class="item"><div class="row"><span>2. In the US, my own human edits and arrangement can be protected, even if AI helped.</span><select data-ans="True"></select></div><div class="exp">True. Human authorship is the key idea.</div></div>
+      <div class="item"><div class="row"><span>3. If AI copies someone’s work and I publish it, I may be responsible.</span><select data-ans="True"></select></div><div class="exp">True. You are responsible for what you publish.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="part">Part B · Attribution and disclosure: when and how to say AI helped</div>
+    <div class="reading">
+      <p><strong>Disclose</strong> when your school or employer requires it, when the work is published or sent to clients, and when your reader would reasonably expect a human did the work. A good disclosure says <em>which tool</em> and <em>what it did</em>.</p>
+      <p><strong>Real example:</strong> In 2023, two New York lawyers submitted a court document with case citations that ChatGPT had invented. They didn’t check the cases or tell the court AI had been used. A judge fined them $5,000.</p>
+    </div>
+    <div class="cg" data-opts="Disclose|Not needed">
+      <div class="item"><div class="row"><span>1. You ask AI for a synonym for one word in a text message to a friend.</span><select data-ans="Not needed"></select></div><div class="exp">Not needed. Low stakes, personal, and tiny help.</div></div>
+      <div class="item"><div class="row"><span>2. AI wrote the first draft of a report you send to a paying client.</span><select data-ans="Disclose"></select></div><div class="exp">Disclose. The client expects to know how the work was made (and many contracts now require it).</div></div>
+      <div class="item"><div class="row"><span>3. AI suggested the outline for an essay in this class.</span><select data-ans="Disclose"></select></div><div class="exp">Disclose. Academic work: always follow the course’s AI rules.</div></div>
+      <div class="item"><div class="row"><span>4. A company blog post was mostly written by AI.</span><select data-ans="Disclose"></select></div><div class="exp">Disclose. Readers may assume a person wrote it. Remember Sports Illustrated (Week 4)!</div></div>
+      <div class="item"><span><b>5. Which disclosure statement is best for an essay?</b></span>
+        <div class="mc" data-ans="c">
+          <label><input type="radio" value="a"> (No statement.)</label>
+          <label><input type="radio" value="b"> “AI helped.”</label>
+          <label><input type="radio" value="c"> “I used Claude to brainstorm ideas and check grammar. The arguments, structure, and final wording are my own.”</label>
+        </div>
+        <div class="exp">c) It names the tool, says exactly what it did, and says what is yours.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <label class="q">💬 Write your own disclosure statement for a piece of work you did recently with AI. Paste it in the chat.</label><textarea></textarea>
+  </section>
+
+  <!-- A5 STUDY: BIAS VIDEO -->
+  <section class="act" id="a5">
+    <div class="act-head">
+      <div><div class="tag">Activity 5 · Study · Video</div><h3>Bias in AI: “The Coded Gaze”</h3></div>
+      <div class="meta"><span class="pill">▶ Video ~9 min</span><button class="btn timer" data-min="9">⏱ 9 min</button><span class="pill">👤 Tasks 7 min</span><button class="btn timer" data-min="7">⏱ 7 min</button></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>
+      <ol><li><b>Before you watch:</b> read the key words and Part A questions.</li>
+      <li><b>Watch</b> Joy Buolamwini’s TED Talk, “How I’m fighting bias in algorithms”: <a href="https://www.ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms" target="_blank" rel="noopener">ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms</a> (turn on subtitles).</li>
+      <li><b>After you watch:</b> answer Part A, read the short text, and do Part B.</li></ol>
+    </div>
+    <div class="lang"><b>Key words:</b> <b>algorithm</b> = a set of steps a computer follows · <b>bias</b> = unfair preference for or against a group · <b>training set</b> = the examples an AI learns from · <b>inclusive</b> = including everyone</div>
+    <div class="part">Part A · Listening check</div>
+    <div class="cg">
+      <div class="item"><span><b>1. What problem did Joy have with face-detection software?</b></span>
+        <div class="mc" data-ans="b"><label><input type="radio" value="a"> It recognised her as a different person.</label><label><input type="radio" value="b"> It didn’t detect her face until she wore a white mask.</label><label><input type="radio" value="c"> It was too slow on her computer.</label></div>
+        <div class="exp">b) The software could not detect her dark-skinned face, but it detected a white mask.</div></div>
+      <div class="item"><span><b>2. What name does she give to algorithmic bias?</b></span>
+        <div class="mc" data-ans="a"><label><input type="radio" value="a"> “The coded gaze”</label><label><input type="radio" value="b"> “The machine mind”</label><label><input type="radio" value="c"> “The data gap”</label></div>
+        <div class="exp">a) The coded gaze.</div></div>
+      <div class="item"><span><b>3. What does she suggest to make AI fairer?</b></span>
+        <div class="mc" data-ans="c"><label><input type="radio" value="a"> Stop using face recognition completely.</label><label><input type="radio" value="b"> Let computers check their own code.</label><label><input type="radio" value="c"> Build more inclusive training sets and think about who codes, how we code, and why we code.</label></div>
+        <div class="exp">c) She also started the Algorithmic Justice League so people can report bias.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="part">How bias gets into AI</div>
+    <div class="tbl"><table>
+      <tr><th>Where</th><th>How</th></tr>
+      <tr><td><b>Data</b></td><td>AI learns from the past. If past data is unequal or incomplete, the AI copies that inequality.</td></tr>
+      <tr><td><b>Design</b></td><td>People choose what the AI measures. A “neutral” feature can be a <b>proxy</b> for a protected group (e.g., zip code can reflect race or income).</td></tr>
+      <tr><td><b>Use</b></td><td>How AI is used can create a <b>feedback loop</b>: the AI’s decisions create new data that “proves” the AI was right.</td></tr>
+    </table></div>
+    <div class="part">Part B · Where did the bias come from?</div>
+    <div class="cg" data-opts="Data|Design|Use">
+      <div class="item"><div class="row"><span>1. A face dataset made mostly of light-skinned faces</span><select data-ans="Data"></select></div><div class="exp">Data: the training set is not representative.</div></div>
+      <div class="item"><div class="row"><span>2. A loan model uses home zip code to predict “reliability”, and zip codes reflect old segregation.</span><select data-ans="Design"></select></div><div class="exp">Design: zip code works as a proxy for race and income.</div></div>
+      <div class="item"><div class="row"><span>3. A tool sends police to one area; they record more crime there; the new data makes the tool choose that area again.</span><select data-ans="Use"></select></div><div class="exp">Use: a feedback loop. (You’ll study this in Lesson 2.)</div></div>
+      <div class="item"><div class="row"><span>4. A hiring tool trained on 10 years of past hires, most of them men</span><select data-ans="Data"></select></div><div class="exp">Data: historical inequality. (This is the Amazon case in Lesson 2.)</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="part">Part C · Video 2: watch and reflect</div>
+    <div class="howto"><strong>Instructions</strong>Watch the second video: <a href="https://www.youtube.com/watch?v=QbLf2zb3oPc" target="_blank" rel="noopener">youtube.com/watch?v=QbLf2zb3oPc</a> (turn on subtitles). Then answer both questions and post one answer in the 💬 chat. <button class="btn timer" data-min="7">⏱ 7 min</button></div>
+    <label class="q">1. What is the main AI risk or problem in the video? Give one specific example from it.</label><textarea></textarea>
+    <label class="q">2. Which type of Diligence (Creation, Transparency, or Deployment) could have prevented or reduced this problem? Why?</label><textarea placeholder="I think ___ Diligence could have helped, because ___."></textarea>
+  </section>
+
+  <!-- A6 STUDY: EMPLOYMENT -->
+  <section class="act" id="a6">
+    <div class="act-head">
+      <div><div class="tag">Activity 6 · Study</div><h3>AI and Jobs: Automate, Augment, or Keep Human?</h3></div>
+      <div class="meta"><span class="pill">👤 → 💬 Chat</span><button class="btn timer" data-min="6">⏱ 6 min</button></div>
+    </div>
+    <div class="reading">
+      <p>AI usually changes <strong>tasks</strong> before it changes whole <strong>jobs</strong>. Some tasks are <strong>automated</strong> (AI does them, people spot-check). Many are <strong>augmented</strong> (AI helps, a person decides). Some should <strong>stay human</strong>, especially when they need empathy, accountability, or judgment about people’s lives.</p>
+      <p>Some jobs will shrink and new ones will appear. Professional value moves toward skills AI does not replace: judgment, relationships, ethics, creativity, and the ability to direct and check AI (the 4Ds!).</p>
+    </div>
+    <div class="howto"><strong>Instructions</strong>Choose the best option for each task. These are suggested answers: you can disagree if you have a good reason. Share one disagreement in the chat.</div>
+    <div class="cg" data-opts="Automate|Augment|Keep human">
+      <div class="item"><div class="row"><span>1. Sorting 2,000 invoices into categories</span><select data-ans="Automate"></select></div><div class="exp">Automate, with spot checks. Repetitive and low-risk.</div></div>
+      <div class="item"><div class="row"><span>2. Writing the first draft of a job ad that a recruiter edits</span><select data-ans="Augment"></select></div><div class="exp">Augment. AI drafts, a person checks for accuracy and fair language.</div></div>
+      <div class="item"><div class="row"><span>3. Telling an employee they are being laid off</span><select data-ans="Keep human"></select></div><div class="exp">Keep human. It needs empathy, respect, and accountability.</div></div>
+      <div class="item"><div class="row"><span>4. Translating a product manual that a native speaker then reviews</span><select data-ans="Augment"></select></div><div class="exp">Augment.</div></div>
+      <div class="item"><div class="row"><span>5. The final decision on someone’s disability benefit claim</span><select data-ans="Keep human"></select></div><div class="exp">Keep human. AI may help organise the file, but a person must decide and be accountable.</div></div>
+      <div class="item"><div class="row"><span>6. Scheduling 30 meetings across five time zones</span><select data-ans="Automate"></select></div><div class="exp">Automate.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <label class="q">💬 In your field, which skill will become MORE valuable because of AI? Why?</label><textarea></textarea>
+  </section>
+
+  <!-- A7 ACTIVATE: POLICY -->
+  <section class="act handout" id="a7">
+    <div class="act-head">
+      <div><div class="tag">Activity 7 · Activate · Handout #4</div><h3>Policy Doctor: Fix a Weak AI Policy</h3></div>
+      <div class="meta"><span class="pill">👤 Read 4</span><button class="btn timer" data-min="4">⏱ 4 min</button><span class="pill">💻 Breakouts 8</span><button class="btn timer" data-min="8">⏱ 8 min</button><span class="pill">🎯 Share 3</span><button class="btn timer" data-min="3">⏱ 3 min</button></div>
+    </div>
+    <div class="part">Handout #4 · Sample organisational AI use policy</div>
+    <div class="policy">
+      <h4>Northside Marketing Group · Responsible AI Use Policy (sample)</h4>
+      <p><b>1. Purpose.</b> We use AI to work faster and better, while protecting our clients, our staff, and our reputation.</p>
+      <p><b>2. Who this applies to.</b> All employees, interns, and contractors.</p>
+      <p><b>3. Approved tools.</b> Use only the AI tools on the IT-approved list. Use your work account, never a personal account, for company work.</p>
+      <p><b>4. Data protection.</b> Follow the traffic-light rule. Never enter passwords, personal data about clients or staff, or confidential company information. Anonymise customer details before using AI.</p>
+      <p><b>5. Human review.</b> A person must check every AI output for accuracy, tone, and fairness before it is sent or published. The person who sends it is responsible for it.</p>
+      <p><b>6. Disclosure.</b> Tell clients when AI produced a significant part of their deliverable. Label AI-generated images and voices.</p>
+      <p><b>7. Fairness.</b> AI must never make final decisions about hiring, firing, pay, or promotion. Any AI tool used in HR must be tested for bias before use and at least once a year.</p>
+      <p><b>8. Intellectual property.</b> Do not use AI to copy a competitor’s or artist’s work. Check that AI images and text do not copy protected material.</p>
+      <p><b>9. Training.</b> All staff complete AI-fluency training once a year.</p>
+      <p><b>10. Reporting.</b> Report AI mistakes, data leaks, or unfair results to <i>ai-help@[company].com</i> within 24 hours. No one will be punished for reporting honestly.</p>
+      <p><b>11. Review.</b> This policy is reviewed every six months, because AI changes quickly.</p>
+    </div>
+    <div class="howto"><strong>Instructions</strong>
+      <ol><li><b>Individual (4 min):</b> read the sample policy above.</li>
+      <li><b>Breakout rooms (8 min):</b> together, choose the best replacement for each weak rule from “QuickHire Inc.” below and check. Then write 3 rules for an AI policy for <b>students at Approach ISC</b>.</li>
+      <li><b>Share (3 min):</b> one person from each room pastes your 3 rules in the chat.</li></ol>
+    </div>
+    <div class="cg">
+      <div class="item"><span><b>Weak rule 1:</b> <i>“Employees can use any AI tool they like.”</i></span>
+        <div class="mc" data-ans="b"><label><input type="radio" value="a"> “Employees should try to use good AI tools.”</label><label><input type="radio" value="b"> “Use only the company-approved tools on the IT list, with your work account.”</label><label><input type="radio" value="c"> “AI tools are not allowed.”</label></div>
+        <div class="exp">b) Specific and practical. (a) is too vague; (c) is unrealistic and pushes people to use AI secretly.</div></div>
+      <div class="item"><span><b>Weak rule 2:</b> <i>“Feel free to paste customer information to get faster answers.”</i></span>
+        <div class="mc" data-ans="a"><label><input type="radio" value="a"> “Never enter customers’ personal data. Remove names and numbers before using AI.”</label><label><input type="radio" value="b"> “Be careful with customer information.”</label><label><input type="radio" value="c"> “Only paste customer information on Fridays.”</label></div>
+        <div class="exp">a) Clear and protects privacy. (b) is too vague to follow.</div></div>
+      <div class="item"><span><b>Weak rule 3:</b> <i>“AI can make final decisions about which candidates to interview.”</i></span>
+        <div class="mc" data-ans="c"><label><input type="radio" value="a"> “AI can decide, but only for junior jobs.”</label><label><input type="radio" value="b"> “AI decisions are always fair because computers have no feelings.”</label><label><input type="radio" value="c"> “AI may help organise applications, but a trained person makes every decision, and tools are tested for bias.”</label></div>
+        <div class="exp">c) Human oversight + bias testing. (b) is false: AI can copy human bias from its data.</div></div>
+      <div class="item"><span><b>Weak rule 4:</b> <i>“There’s no need to tell anyone when you use AI.”</i></span>
+        <div class="mc" data-ans="b"><label><input type="radio" value="a"> “Tell your friends when you use AI.”</label><label><input type="radio" value="b"> “Disclose significant AI help in client work and published content.”</label><label><input type="radio" value="c"> “Never mention AI to clients.”</label></div>
+        <div class="exp">b) Transparency Diligence.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <label class="q">💻 Our 3 rules for an Approach ISC student AI policy:</label>
+    <textarea placeholder="1. Students must...&#10;2. Students should never...&#10;3. When students use AI for assignments, they..."></textarea>
+    <div class="lang"><b>Policy language:</b> “must / must not” (required) · “should” (strongly recommended) · “may” (allowed) · “never” · “before ___, students must ___.”</div>
+  </section>
+
+  <!-- A8 ACTIVATE: EXIT -->
+  <section class="act" id="a8">
+    <div class="act-head">
+      <div><div class="tag">Activity 8 · Activate · Exit check</div><h3>Lesson 1 Vocabulary</h3></div>
+      <div class="meta"><span class="pill">👤 Individual</span><button class="btn timer" data-min="4">⏱ 4 min</button></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>Complete each sentence. Use each word once. Then check.</div>
+    <div class="cg" data-opts="diligence|anonymise|disclosure|copyright|proxy">
+      <div class="item inline">1. Before you paste the email, <select data-ans="anonymise"></select> it by removing the customer’s name and order number.<div class="exp">anonymise</div></div>
+      <div class="item inline">2. A clear <select data-ans="disclosure"></select> says which AI tool you used and what it did.<div class="exp">disclosure</div></div>
+      <div class="item inline">3. In the US, <select data-ans="copyright"></select> protects human creativity, not content made entirely by AI.<div class="exp">copyright</div></div>
+      <div class="item inline">4. Zip code can act as a <select data-ans="proxy"></select> for race or income.<div class="exp">proxy</div></div>
+      <div class="item inline">5. <select data-ans="diligence"></select> means taking responsibility for what we do with AI and how we do it.<div class="exp">diligence</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+  </section>
+
+  <!-- BREAK -->
+  <div class="break" id="break">
+    <div style="font-size:40px">☕</div>
+    <h2>10-Minute Break</h2>
+    <p>100 → 110 min. Keep this tab open. Your answers are saved.<br>Next: AI in hiring and in government, and what happens when AI goes wrong.</p>
+  </div>
+
+  <!-- ===================== LESSON 2 ===================== -->
+  <div class="block b2" id="block2">
+    <div>Lesson 2 · 110–210 min</div>
+    <h2>Diligence in the Real World: HR, Government &amp; AI Failures</h2>
+    <p>Engage → Study → Activate</p>
+  </div>
+
+  <!-- B1 ENGAGE -->
+  <section class="act b2" id="b1">
+    <div class="act-head">
+      <div><div class="tag">Activity 9 · Engage</div><h3>Would You Accept This Decision from an AI?</h3></div>
+      <div class="meta"><span class="pill">📊 Poll + 💬 Chat</span><button class="btn timer" data-min="7">⏱ 7 min</button></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>Rate each decision: 1 = I’m totally fine with AI deciding · 5 = a human MUST decide. Vote in the class poll. Then answer the chat question.</div>
+    <div class="cg" data-opts="1|2|3|4|5">
+      <div class="item"><div class="row"><span>a) Which movie to recommend to you next</span><select></select></div></div>
+      <div class="item"><div class="row"><span>b) Which emails go to your spam folder</span><select></select></div></div>
+      <div class="item"><div class="row"><span>c) Whether your job application is rejected</span><select></select></div></div>
+      <div class="item"><div class="row"><span>d) Whether your visa application needs extra checks</span><select></select></div></div>
+      <div class="item"><div class="row"><span>e) Which neighbourhoods get more police patrols</span><select></select></div></div>
+    </div>
+    <label class="q">💬 What made you give some decisions a 5? (Think: stakes, fairness, can you appeal?)</label><textarea></textarea>
+  </section>
+
+  <!-- B2 STUDY HR + AMAZON -->
+  <section class="act b2 handout" id="b2">
+    <div class="act-head">
+      <div><div class="tag">Activity 10 · Study · Handout #2</div><h3>AI in HR &amp; the Amazon Hiring Case</h3></div>
+      <div class="meta"><span class="pill">👤 Read 8</span><button class="btn timer" data-min="8">⏱ 8 min</button><span class="pill">💻 Breakouts 6</span><button class="btn timer" data-min="6">⏱ 6 min</button></div>
+    </div>
+    <div class="part">How companies use AI in HR</div>
+    <div class="tbl"><table>
+      <tr><th>Use</th><th>What it does</th><th>Main risk</th></tr>
+      <tr><td><b>Resume screening</b></td><td>Ranks or filters applications</td><td>Copies bias from past hiring data</td></tr>
+      <tr><td><b>Video interview analysis</b></td><td>Scores recorded answers</td><td>Accents, disabilities, or camera quality can affect scores</td></tr>
+      <tr><td><b>Employee monitoring</b></td><td>Tracks keystrokes, screens, or activity (“bossware”)</td><td>Privacy, stress, and measuring activity instead of real work</td></tr>
+    </table></div>
+    <p class="note">Laws are starting to respond. New York City (2023) requires yearly bias audits for automated hiring tools, and the EU AI Act lists AI used for hiring and managing workers as <b>high-risk</b>.</p>
+    <div class="part">Handout #2 · Case: AI bias in hiring at Amazon</div>
+    <div class="lang"><b>Key words:</b> <b>applicant</b> = a person who applies for a job · <b>penalise</b> = give a lower score as a punishment · <b>disband</b> = stop a team or group</div>
+    <div class="reading">
+      <p>In 2014, a team at Amazon started building an AI tool to review job applicants’ resumes and give them a score from one to five stars. The goal was to find top talent automatically.</p>
+      <p>The tool learned from resumes submitted to Amazon over the previous ten years. Most of those resumes came from men, which reflected the male-dominated tech industry. By 2015, the company noticed a problem: the system was not rating candidates for technical jobs in a gender-neutral way. It <strong>penalised resumes that included the word “women’s”</strong>, as in “women’s chess club captain”, and it reportedly downgraded graduates of two all-women’s colleges. It also favoured verbs such as “executed” and “captured”, which appeared more often on men’s resumes.</p>
+      <p>Engineers edited the program to make it neutral to these particular terms, but they could not be sure it would not find other ways to discriminate. Amazon disbanded the team by early 2017. When Reuters reported the story in 2018, Amazon said its recruiters had never used the tool’s rankings alone to evaluate candidates.</p>
+    </div>
+    <div class="cg">
+      <div class="item"><span><b>1. Why did the tool prefer men?</b></span>
+        <div class="mc" data-ans="b"><label><input type="radio" value="a"> The engineers programmed it to prefer men.</label><label><input type="radio" value="b"> It learned from ten years of resumes, mostly from men.</label><label><input type="radio" value="c"> Women applied with worse resumes.</label></div>
+        <div class="exp">b) Nobody told it to prefer men. It learned the pattern from historical data.</div></div>
+      <div class="item"><span><b>2. Removing the word “women’s” did not solve the problem. Why?</b></span>
+        <div class="mc" data-ans="c"><label><input type="radio" value="a"> The engineers forgot to save the change.</label><label><input type="radio" value="b"> The word was too common.</label><label><input type="radio" value="c"> Other words and patterns (like certain verbs or colleges) could act as proxies for gender.</label></div>
+        <div class="exp">c) Proxies. Bias can hide in features that look neutral.</div></div>
+      <div class="item"><div class="row"><span><b>3.</b> Where did the bias mainly come from?</span><select data-ans="Data" data-opts="Data|Design|Use"></select></div><div class="exp">Data: historical inequality in past hiring.</div></div>
+      <div class="item"><div class="row"><span><b>4.</b> Testing the tool, finding the problem, and stopping the project is an example of which Diligence?</span><select data-ans="Deployment" data-opts="Creation|Transparency|Deployment"></select></div><div class="exp">Deployment Diligence: checking for harm before relying on the output. (You could also argue Creation: deciding the tool was not right for the job.)</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <label class="q">💻 Breakout question: You are the HR director of a company that wants to buy an AI resume screener. Write 3 questions you would ask the seller.</label>
+    <textarea placeholder="1. What data was the tool trained on?&#10;2.&#10;3."></textarea>
+  </section>
+
+  <!-- B3 STUDY PUBLIC SECTOR + POLICING -->
+  <section class="act b2 handout" id="b3">
+    <div class="act-head">
+      <div><div class="tag">Activity 11 · Study · Handout #3</div><h3>AI in Government &amp; Predictive Policing</h3></div>
+      <div class="meta"><span class="pill">👤 Read 8</span><button class="btn timer" data-min="8">⏱ 8 min</button><span class="pill">👤 Tasks 7</span><button class="btn timer" data-min="7">⏱ 7 min</button></div>
+    </div>
+    <div class="part">Why government AI needs extra care</div>
+    <div class="tbl"><table>
+      <tr><th>Area</th><th>Examples</th></tr>
+      <tr><td><b>Policing</b></td><td>Predicting where crime will happen; facial recognition</td></tr>
+      <tr><td><b>Benefits</b></td><td>Flagging welfare or tax claims as possible fraud</td></tr>
+      <tr><td><b>Immigration</b></td><td>Sorting visa applications by “risk”</td></tr>
+    </table></div>
+    <p class="note">Citizens usually <b>can’t choose</b> another provider, and decisions affect their freedom, money, and safety. That’s why <b>algorithmic accountability</b> matters: someone must be able to explain, check, and correct the system.</p>
+    <div class="part">Handout #3 · Case: predictive policing</div>
+    <div class="lang"><b>Key words:</b> <b>predictive</b> = trying to say what will happen · <b>patrol</b> = police moving around an area to watch it · <b>audit</b> = an official check · <b>ban</b> = officially stop</div>
+    <div class="reading">
+      <p>In the 2010s, many U.S. police departments used <strong>predictive policing</strong> software, such as PredPol (later called Geolitica). The software used past crime reports to predict where crime was likely to happen next, so police could send patrols there.</p>
+      <p>The problem: crime data does not show all crime. It shows the crime that <em>police recorded</em>. If police already patrol some neighbourhoods more than others, those areas produce more records. The software then predicts more crime there, more police are sent, and even more crime is recorded. This is a <strong>feedback loop</strong>.</p>
+      <p>In a 2016 study, researchers Kristian Lum and William Isaac tested this idea with drug-crime data from Oakland, California. Health surveys suggested drug use was spread across the city, but the algorithm would have sent police mostly to Black and low-income neighbourhoods.</p>
+      <p>After criticism from researchers and communities, some cities changed course. In 2020, Santa Cruz, California, became one of the first U.S. cities to ban predictive policing, and the Los Angeles Police Department stopped using PredPol.</p>
+    </div>
+    <div class="part">Task A · Put the feedback loop in order (1–5)</div>
+    <div class="cg" data-opts="1|2|3|4|5">
+      <div class="item"><div class="row"><span>More police patrol Area A.</span><select data-ans="3"></select></div><div class="exp">Step 3</div></div>
+      <div class="item"><div class="row"><span>Past records show more arrests in Area A.</span><select data-ans="1"></select></div><div class="exp">Step 1</div></div>
+      <div class="item"><div class="row"><span>The new data seems to “prove” the prediction was right.</span><select data-ans="5"></select></div><div class="exp">Step 5, and the loop starts again.</div></div>
+      <div class="item"><div class="row"><span>The software predicts more crime in Area A.</span><select data-ans="2"></select></div><div class="exp">Step 2</div></div>
+      <div class="item"><div class="row"><span>Police find and record more crime in Area A.</span><select data-ans="4"></select></div><div class="exp">Step 4</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="part">Task B · Comprehension</div>
+    <div class="cg">
+      <div class="item"><span><b>1. What does crime data really measure?</b></span>
+        <div class="mc" data-ans="a"><label><input type="radio" value="a"> The crime that police recorded</label><label><input type="radio" value="b"> All crime in a city</label><label><input type="radio" value="c"> Where criminals live</label></div>
+        <div class="exp">a) It reflects where police looked, not only where crime happened.</div></div>
+      <div class="item"><span><b>2. What did the Oakland study show?</b></span>
+        <div class="mc" data-ans="b"><label><input type="radio" value="a"> The algorithm reduced crime by half.</label><label><input type="radio" value="b"> The algorithm would focus police on Black and low-income areas, even though drug use was spread across the city.</label><label><input type="radio" value="c"> Drug use only happened in a few areas.</label></div>
+        <div class="exp">b) A biased input produced a biased output.</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+  </section>
+
+  <!-- B4 ACTIVATE CASE CLINIC -->
+  <section class="act b2" id="b4">
+    <div class="act-head">
+      <div><div class="tag">Activity 12 · Activate · Jigsaw</div><h3>Case Clinic: When AI Goes Wrong</h3></div>
+      <div class="meta"><span class="pill">💻 Breakouts 15</span><button class="btn timer" data-min="15">⏱ 15 min</button><span class="pill">🎯 Report 12</span><button class="btn timer" data-min="12">⏱ 12 min</button></div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>
+      <ol><li>Your teacher gives each breakout room ONE case (A, B, C, or D).</li>
+      <li>In your room (15 min): read your case and answer the 4 questions together. Choose a speaker.</li>
+      <li>Back in the main room (12 min): each speaker reports in 2–3 minutes. While others speak, take notes on their cases in the table at the end.</li></ol>
+    </div>
+    <div class="grid2">
+      <div class="case"><h4>Case A · Netherlands: childcare benefits</h4><p>From around 2013, the Dutch tax authority used a risk-scoring system to choose which childcare-benefit claims to check for fraud. Having a non-Dutch nationality was used as a risk factor. Tens of thousands of parents were wrongly treated as fraudsters and told to pay back large amounts of money. Many families fell into serious debt. In January 2021, the Dutch government resigned over the scandal.</p></div>
+      <div class="case"><h4>Case B · Australia: “Robodebt”</h4><p>From 2016 to 2019, the Australian government used an automated system that compared yearly tax data with welfare payments and sent debt notices to people it calculated had been overpaid. Many of the debts were wrong, and people had to prove they did not owe the money. The government later agreed to a class-action settlement worth over A$1 billion. In 2023, a Royal Commission called the scheme “crude and cruel”.</p></div>
+      <div class="case"><h4>Case C · UK: exam grades by algorithm (2020)</h4><p>When COVID-19 cancelled exams, England’s exam regulator used an algorithm to adjust teachers’ predicted A-level grades, partly based on each school’s past results. About 40% of grades were lowered, and students at schools in poorer areas were hit hardest. After student protests (“Ditch the algorithm!”), the government reversed the decision and used teachers’ grades.</p></div>
+      <div class="case"><h4>Case D · USA: a wrongful arrest (Detroit, 2020)</h4><p>Police in Detroit arrested Robert Williams in front of his family after facial recognition software matched his old driver’s license photo to a blurry video of a shoplifter. It was the wrong man. He was held for about 30 hours before the case was dropped. In a 2024 settlement, Detroit police agreed that a facial recognition match alone cannot be the reason for an arrest.</p></div>
+    </div>
+    <div class="part">Our case: <select data-opts="Case A|Case B|Case C|Case D"></select></div>
+    <label class="q">1. What happened? (2 sentences)</label><textarea></textarea>
+    <label class="q">2. Who was harmed, and how?</label><textarea></textarea>
+    <label class="q">3. Which Diligence failed most? <select data-opts="Creation|Transparency|Deployment"></select> Explain:</label><textarea></textarea>
+    <label class="q">4. What safeguard would have prevented or reduced the harm?</label><textarea></textarea>
+    <div class="part">Notes on the other groups’ cases</div>
+    <div class="tbl"><table>
+      <tr><th>Case</th><th>Main harm</th><th>Lesson</th></tr>
+      <tr><td>A</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>B</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>C</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>D</td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table></div>
+    <div class="lang"><b>Reporting language:</b> “Our case is about ___.” · “The people most affected were ___.” · “The biggest failure was ___ because ___.” · “If they had ___, this could have been prevented.”</div>
+  </section>
+
+  <!-- B5 ACTIVATE SAFEGUARDS -->
+  <section class="act b2" id="b5">
+    <div class="act-head">
+      <div><div class="tag">Activity 13 · Activate</div><h3>Design the Safeguards</h3></div>
+      <div class="meta"><span class="pill">📊 Poll + 💬 Chat</span><button class="btn timer" data-min="10">⏱ 10 min</button></div>
+    </div>
+    <div class="quote">“Your city wants to use AI to flag welfare claims that might be fraud. You are on the city council. What must be in place first?”</div>
+    <div class="howto"><strong>Instructions</strong>
+      <ol><li>Tick the safeguards you think are essential. Then rank your TOP 3 (1 = most important).</li>
+      <li>Vote for your #1 safeguard in the class poll.</li>
+      <li>In the chat, defend your #1 choice in one or two sentences, using the cases you studied.</li></ol>
+    </div>
+    <div class="tbl"><table>
+      <tr><th>Safeguard</th><th>Essential?</th><th>My top 3</th></tr>
+      <tr><td><b>Human decision:</b> AI can flag, but a trained person decides.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+      <tr><td><b>Right to appeal:</b> people can challenge the decision easily.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+      <tr><td><b>Independent audit:</b> outside experts test it for bias before and during use.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+      <tr><td><b>Transparency:</b> the public knows the system exists and how it works.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+      <tr><td><b>No protected traits:</b> nationality, race, etc. (and proxies) are not used.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+      <tr><td><b>Burden of proof:</b> the government must prove fraud; citizens don’t have to prove innocence.</td><td><input type="checkbox"></td><td><select data-opts="1|2|3"></select></td></tr>
+    </table></div>
+    <label class="q">💬 My #1 safeguard and why:</label><textarea placeholder="My #1 safeguard is ___ because in the ___ case, ___."></textarea>
+  </section>
+
+  <!-- B6 HOMEWORK -->
+  <section class="act b2 handout" id="b6">
+    <div class="act-head">
+      <div><div class="tag">Activity 14 · Homework · AI Task 5</div><h3>Write a Mini AI Use Policy</h3></div>
+      <div class="meta"><span class="pill">📅 Due next class, with Journal Entry 5</span><button class="btn timer" data-min="6">⏱ 6 min planning</button></div>
+    </div>
+    <div class="reading"><p><b>The task:</b> Choose a real workplace, team, club, or school you know. Write a short AI use policy for it (5–7 rules), using Handout #4 as a model. You may use AI to help, but you must apply all three types of Diligence.</p></div>
+    <div class="howto"><strong>What to submit</strong>
+      <ol><li>Your policy: 5–7 rules, including at least one rule each about <b>data privacy</b>, <b>human review</b>, <b>disclosure</b>, and <b>fairness</b>.</li>
+      <li>A disclosure statement: did you use AI to write it? Which tool, and for what?</li>
+      <li>A 150-word reflection: Which rule would be hardest for people to follow, and why?</li></ol>
+    </div>
+    <div class="part">Plan it now</div>
+    <label class="q">Organisation I will write for:</label><input type="text">
+    <label class="q">The biggest AI risk for this organisation is:</label><input type="text">
+    <label class="q">My first rule (draft):</label><textarea></textarea>
+    <div class="part">Draft your reflection here (target: 150 words)</div>
+    <textarea data-wc="150" style="min-height:160px"></textarea><div class="wc">0 / 150 words</div>
+    <div class="part">Before you submit</div>
+    <div class="checklist">
+      <label><input type="checkbox"> My policy has 5–7 clear rules using must / should / may.</label>
+      <label><input type="checkbox"> It covers privacy, human review, disclosure, and fairness.</label>
+      <label><input type="checkbox"> I included my own disclosure statement.</label>
+      <label><input type="checkbox"> My reflection is about 150 words.</label>
+      <label><input type="checkbox"> I will submit it with Journal Entry 5.</label>
+    </div>
+  </section>
+
+  <!-- B7 WRAP-UP -->
+  <section class="act b2" id="b7">
+    <div class="act-head">
+      <div><div class="tag">Activity 15 · Activate · Wrap-up</div><h3>Key Takeaways &amp; Exit Ticket</h3></div>
+      <div class="meta"><span class="pill">👤 Individual</span><button class="btn timer" data-min="6">⏱ 6 min</button></div>
+    </div>
+    <div class="takeaways">
+      <div class="item">1. Diligence = responsibility for HOW you use AI (Creation), WHETHER you’re honest about it (Transparency), and WHAT you share (Deployment).</div>
+      <div class="item">2. AI learns from the past. If the past was unfair, AI can repeat it at scale, even when nobody intends it.</div>
+      <div class="item">3. The higher the stakes for people, the more human oversight, transparency, and right to appeal we need.</div>
+    </div>
+    <div class="howto"><strong>Instructions</strong>Complete the gap-fill and check. Then finish the sentence starter and post it in the chat.</div>
+    <div class="cg" data-opts="feedback loop|accountability|high-risk|oversight|audit">
+      <div class="item inline">1. The EU AI Act lists AI used for hiring as <select data-ans="high-risk"></select>.<div class="exp">high-risk</div></div>
+      <div class="item inline">2. More patrols → more records → more patrols: this is a <select data-ans="feedback loop"></select>.<div class="exp">feedback loop</div></div>
+      <div class="item inline">3. New York City requires a yearly bias <select data-ans="audit"></select> for automated hiring tools.<div class="exp">audit</div></div>
+      <div class="item inline">4. Human <select data-ans="oversight"></select> means a person watches, checks, and can stop the AI.<div class="exp">oversight</div></div>
+      <div class="item inline">5. Algorithmic <select data-ans="accountability"></select> means someone must explain and correct an AI system’s decisions.<div class="exp">accountability</div></div>
+      <div class="actions"><button class="btn check">Check answers</button><button class="btn ghost clear">Try again</button><span class="score"></span></div>
+    </div>
+    <div class="item inline" style="margin-top:14px">💬 After today, one thing I will do differently when I use AI is <input type="text" placeholder="...">.</div>
+    <p style="text-align:center;font-style:italic;margin-top:18px">See you next week. Use AI, and use it responsibly.</p>
+  </section>
+
+  <footer>Approach International Student Center® · AI Fluency · Week 5 · Diligence</footer>
+</div>
+
+<div id="timer" hidden role="timer" aria-live="polite">
+  <span class="t" id="timerTxt">0:00</span>
+  <button id="timerPause">Pause</button>
+  <button id="timerClose">Close</button>
+</div>
+
+<script>
+(function(){
+  var KEY = 'aif-week5-diligence-v1';
+  var store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { store = {}; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+
+  // Build select options
+  document.querySelectorAll('select').forEach(function(s){
+    var holder = s.hasAttribute('data-opts') ? s : s.closest('[data-opts]');
+    if(!holder) return;
+    var opts = holder.getAttribute('data-opts').split('|');
+    var first = document.createElement('option'); first.value=''; first.textContent='— choose —'; s.appendChild(first);
+    opts.forEach(function(o){ var op=document.createElement('option'); op.value=o; op.textContent=o; s.appendChild(op); });
+  });
+
+  // Name radio groups
+  var mcCount = 0;
+  document.querySelectorAll('.mc').forEach(function(mc){
+    var n = 'mc' + (mcCount++);
+    mc.querySelectorAll('input[type=radio]').forEach(function(r){ r.name = n; });
+  });
+
+  // Autosave
+  var fields = document.querySelectorAll('textarea, input[type=text], select, input[type=checkbox]');
+  fields.forEach(function(el, i){
+    var k = el.id || ('f' + i);
+    if(store[k] !== undefined){ if(el.type==='checkbox') el.checked = !!store[k]; else el.value = store[k]; }
+    var ev = (el.tagName==='SELECT' || el.type==='checkbox') ? 'change' : 'input';
+    el.addEventListener(ev, function(){ store[k] = el.type==='checkbox' ? el.checked : el.value; save(); });
+  });
+  document.querySelectorAll('input[type=radio]').forEach(function(r){
+    if(store['r_'+r.name] === r.value) r.checked = true;
+    r.addEventListener('change', function(){ store['r_'+r.name] = r.value; save(); updateRubric(); });
+  });
+
+  // Check answers
+  function checkGroup(cg){
+    var total=0, right=0;
+    cg.querySelectorAll('.item').forEach(function(item){
+      var sel = item.querySelector('select[data-ans]');
+      var mc = item.querySelector('.mc[data-ans]');
+      if(!sel && !mc) return;
+      total++;
+      var ok;
+      if(sel){ ok = sel.value === sel.getAttribute('data-ans'); }
+      else { var c = mc.querySelector('input:checked'); ok = !!c && c.value === mc.getAttribute('data-ans'); }
+      item.classList.remove('ok','bad');
+      item.classList.add(ok ? 'ok' : 'bad', 'checked');
+      if(ok) right++;
+    });
+    var sc = cg.querySelector('.score');
+    if(sc) sc.textContent = 'Score: ' + right + ' / ' + total + (right===total ? ' 🎉' : '');
+  }
+  function clearGroup(cg){
+    cg.querySelectorAll('.item').forEach(function(item){
+      item.classList.remove('ok','bad','checked');
+      var sel = item.querySelector('select[data-ans]');
+      if(sel){ sel.value=''; sel.dispatchEvent(new Event('change')); }
+      item.querySelectorAll('.mc[data-ans] input').forEach(function(r){ if(r.checked){ r.checked=false; delete store['r_'+r.name]; } });
+    });
+    save();
+    var sc = cg.querySelector('.score'); if(sc) sc.textContent='';
+  }
+  document.querySelectorAll('.check').forEach(function(b){ b.addEventListener('click', function(){ checkGroup(b.closest('.cg')); }); });
+  document.querySelectorAll('.clear').forEach(function(b){ b.addEventListener('click', function(){ clearGroup(b.closest('.cg')); }); });
+
+  // Rubric
+  function updateRubric(){
+    var t=0, n=0;
+    for(var i=1;i<=4;i++){ var c=document.querySelector('input[name=rub'+i+']:checked'); if(c){ t+=+c.value; n++; } }
+    document.getElementById('rubTotal').textContent = n ? t : '–';
+  }
+  updateRubric();
+
+  // Word count
+  document.querySelectorAll('textarea[data-wc]').forEach(function(ta){
+    var out = ta.nextElementSibling, target = ta.getAttribute('data-wc');
+    function wc(){ var w = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0; out.textContent = w + ' / ' + target + ' words'; }
+    ta.addEventListener('input', wc); wc();
+  });
+
+  // Copy prompts
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var text = b.parentElement.textContent.replace(b.textContent,'').trim();
+      var done = function(){ b.textContent='Copied!'; setTimeout(function(){ b.textContent='Copy'; },1500); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(text).then(done, function(){}); }
+      else { var t=document.createElement('textarea'); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand('copy');done();}catch(e){} t.remove(); }
+    });
+  });
+
+  // Reset all
+  document.getElementById('resetAll').addEventListener('click', function(){
+    if(!confirm('Clear ALL your answers in this workbook? This cannot be undone.')) return;
+    try { localStorage.removeItem(KEY); } catch(e){}
+    location.reload();
+  });
+
+  // Timer
+  var box=document.getElementById('timer'), txt=document.getElementById('timerTxt'), pauseBtn=document.getElementById('timerPause');
+  var remaining=0, endAt=0, iv=null, paused=false;
+  function render(s){ txt.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); }
+  function tick(){
+    var s = Math.max(0, Math.round((endAt - Date.now())/1000));
+    render(s);
+    if(s<=0){ clearInterval(iv); box.classList.add('done'); txt.textContent="Time!"; }
+  }
+  function start(min){
+    clearInterval(iv); box.hidden=false; box.classList.remove('done'); paused=false; pauseBtn.textContent='Pause';
+    endAt = Date.now() + min*60000; tick(); iv=setInterval(tick, 250);
+  }
+  document.querySelectorAll('.btn.timer').forEach(function(b){ b.addEventListener('click', function(){ start(+b.getAttribute('data-min')); }); });
+  pauseBtn.addEventListener('click', function(){
+    if(!paused){ remaining = endAt - Date.now(); clearInterval(iv); paused=true; pauseBtn.textContent='Resume'; }
+    else { endAt = Date.now() + remaining; iv=setInterval(tick,250); paused=false; pauseBtn.textContent='Pause'; }
+  });
+  document.getElementById('timerClose').addEventListener('click', function(){ clearInterval(iv); box.hidden=true; });
+})();
+</script>
+</body>
+</html>
